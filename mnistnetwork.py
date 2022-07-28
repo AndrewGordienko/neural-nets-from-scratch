@@ -3,6 +3,7 @@ from keras.datasets import mnist
 
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
 images, labels = (x_train[0:1000].reshape(1000, 28*28)/255, y_train[0:1000])
+x_test, y_test = (x_test[0:1000].reshape(1000, 28*28)/255, y_test[0:1000])
 
 lr = 0.005
 input_size = 784
@@ -12,11 +13,12 @@ epochs = 40
 
 weights_0_1 = 0.2 * np.random.random((input_size, hidden_size)) - 0.1
 weights_1_2 = 0.2 * np.random.random((hidden_size, output_size)) - 0.1
+dropout_mask = np.random.randint(2, size = hidden_size)
 
 class Network:
     def forward(self, input):
         self.input = input
-        self.layer1 = self.relu(self.input.dot(weights_0_1))
+        self.layer1 = self.relu(self.input.dot(weights_0_1))  * dropout_mask * 2
         self.layer2 = self.relu(self.layer1.dot(weights_1_2))
         
         return self.layer2
@@ -44,6 +46,7 @@ for epoch in range(epochs):
 
         layer_2_delta = value - ground_truth
         layer_1_delta = layer_2_delta.dot(weights_1_2.T) * network.relu2deriv(network.layer1)
+        layer_1_delta *= dropout_mask
 
         weights_1_2 -= lr * network.layer1.T.dot(layer_2_delta)
         weights_0_1 -= lr * network.input.T.dot(layer_1_delta)
@@ -52,5 +55,3 @@ for epoch in range(epochs):
             counter += 1
 
     print(f"error is {error} counter is {counter}")
-
-    
