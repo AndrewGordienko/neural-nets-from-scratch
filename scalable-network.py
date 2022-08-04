@@ -116,33 +116,6 @@ class Network:
                     self.network_topology[layer][i].connections_out[j].weight -= self.lr * self.network_topology[layer][i].value * all_deltas[delta_counter][0][index]
             delta_counter += 1
 
-        
-
-
-    def old_backprop(self, value, ground_truth):
-        layer_2_delta = value - ground_truth
-        layer_1_delta = []
-
-        last_layer = len(self.network_topology) - 1
-        second_last_layer = len(self.network_topology) - 2
-        first_layer = len(self.network_topology) - 3
-        
-        for i in range(len(self.network_topology[second_last_layer])):
-            for j in range(len(self.network_topology[second_last_layer][i].connections_out)):
-                weight = self.network_topology[second_last_layer][i].connections_out[j].weight
-                deriv = self.relu2deriv(self.network_topology[second_last_layer][i].value)
-
-                node_number = self.network_topology[second_last_layer][i].connections_out[j].output_node_number
-                for p in range(len(self.network_topology[last_layer])):
-                        if self.network_topology[last_layer][p].number == node_number:
-                            index = p
-
-                layer_1_delta.append(layer_2_delta[0][index] * weight * deriv)
-        
-        print(layer_1_delta)
-
-
-
     def ReLU(self, x):
         return x * (x > 0)
     
