@@ -1,1 +1,1 @@
-used neat to start predicting images
+used neat to start predicting basic training data. need to address a better way at calculating score based off error on not 1 neuron output layers. results jpeg shows that this is feasible. backprop will be added as well. training on mnist is too compute intensive and unnecessary. 
