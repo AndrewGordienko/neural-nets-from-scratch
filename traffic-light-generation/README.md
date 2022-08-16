@@ -1,5 +1,6 @@
 generates network with mutations in style of neat and then trains the network. error is observed to decrease. 
 
+--------------------------
 error is 2.566320030377838
 error is 2.546798227067584
 error is 2.5267448353446484
@@ -20,3 +21,4 @@ error is 2.205182507536501
 error is 2.1808238358820278
 error is 2.156527864990407
 error is 2.1323449362413625
+--------------------------
