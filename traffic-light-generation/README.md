@@ -21,4 +21,4 @@ generates network with mutations in style of neat and then trains the network. e
 | error is 2.1808238358820278 | 
 | error is 2.156527864990407 | 
 | error is 2.1323449362413625 | 
---------------------------
+------------------------------
